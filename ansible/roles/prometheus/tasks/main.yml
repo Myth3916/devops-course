@@ -1,0 +1,72 @@
+---
+- name: Create prometheus user
+  user:
+    name: prometheus
+    shell: /bin/false
+    create_home: no
+    system: yes
+
+- name: Create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: prometheus
+    group: prometheus
+    mode: '0755'
+  loop:
+    - /etc/prometheus
+    - /var/lib/prometheus
+
+- name: Download Prometheus
+  get_url:
+    url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
+    dest: "/tmp/prometheus.tar.gz"
+    mode: '0644'
+
+- name: Extract Prometheus
+  unarchive:
+    src: "/tmp/prometheus.tar.gz"
+    dest: /tmp
+    remote_src: yes
+
+- name: Install Prometheus binary
+  copy:
+    src: "/tmp/prometheus-{{ prometheus_version }}.linux-amd64/prometheus"
+    dest: /usr/local/bin/prometheus
+    owner: prometheus
+    group: prometheus
+    mode: '0755'
+    remote_src: yes
+
+- name: Create Prometheus config
+  template:
+    src: prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+    owner: prometheus
+    group: prometheus
+    mode: '0644'
+
+- name: Create systemd service for Prometheus
+  copy:
+    content: |
+      [Unit]
+      Description=Prometheus
+      Wants=network-online.target
+      After=network-online.target
+
+      [Service]
+      User=prometheus
+      Group=prometheus
+      Type=simple
+      ExecStart=/usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml --web.listen-address={{ prometheus_host }}:{{ prometheus_port }}
+
+      [Install]
+      WantedBy=multi-user.target
+    dest: /etc/systemd/system/prometheus.service
+
+- name: Enable and start Prometheus
+  systemd:
+    name: prometheus
+    enabled: yes
+    state: started
+    daemon_reload: yes

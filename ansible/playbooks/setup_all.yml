@@ -1,0 +1,30 @@
+---
+- name: Базовая настройка всех серверов
+  hosts: all
+  become: yes
+  roles:
+    - common
+
+- name: Настройка веб-серверов
+  hosts: webservers
+  become: yes
+  roles:
+    - nginx
+    - node_exporter
+    - filebeat
+  vars:
+    filebeat_server_name: "{{ inventory_hostname }}"
+
+- name: Настройка monitoring-server
+  hosts: monitoring-server
+  become: yes
+  roles:
+    - prometheus
+    - grafana
+
+- name: Настройка logging-server
+  hosts: logging-server
+  become: yes
+  roles:
+    - elasticsearch
+    - kibana

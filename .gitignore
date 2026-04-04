@@ -1,0 +1,5 @@
+*.deb
+ansible/files/
+.terraform/
+*.tfstate
+*.tfstate.backup

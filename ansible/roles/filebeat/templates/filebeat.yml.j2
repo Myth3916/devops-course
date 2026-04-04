@@ -1,0 +1,20 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - {{ nginx_access_log }}
+    - {{ nginx_error_log }}
+  fields:
+    server: "{{ inventory_hostname }}"
+    log_type: nginx
+
+output.elasticsearch:
+  hosts: {{ filebeat_output_hosts }}
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat
+  keepfiles: 7
+  permissions: 0644

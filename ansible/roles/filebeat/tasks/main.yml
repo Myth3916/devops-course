@@ -1,0 +1,31 @@
+---
+- name: Copy Filebeat deb package
+  copy:
+    src: "{{ playbook_dir }}/../files/filebeat-8.14.0-amd64.deb"
+    dest: /tmp/filebeat-8.14.0-amd64.deb
+    mode: '0644'
+
+- name: Install Filebeat
+  apt:
+    deb: /tmp/filebeat-8.14.0-amd64.deb
+    state: present
+
+- name: Deploy Filebeat configuration
+  template:
+    src: filebeat.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
+- name: Enable and start Filebeat
+  systemd:
+    name: filebeat
+    enabled: yes
+    state: restarted
+    daemon_reload: yes
+
+- name: Wait for Filebeat to start
+  wait_for:
+    timeout: 10

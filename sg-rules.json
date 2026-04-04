@@ -1,0 +1,147 @@
+{
+  "id": "enpg3kiju9ikf3g8e4cr",
+  "folder_id": "b1gu6pcctq3f129snd9r",
+  "created_at": "2026-03-23T18:23:10Z",
+  "name": "sg-public",
+  "description": "Публичные сервисы: HTTP/HTTPS из интернета [ALB health checks enabled]",
+  "network_id": "enp88n9vccperevqqqud",
+  "status": "ACTIVE",
+  "rules": [
+    {
+      "id": "enptj4p2p9ogfha49uk8",
+      "description": "All outbound traffic",
+      "direction": "EGRESS",
+      "ports": {
+        "to_port": "65535"
+      },
+      "protocol_name": "ANY",
+      "protocol_number": "-1",
+      "cidr_blocks": {
+        "v4_cidr_blocks": [
+          "0.0.0.0/0"
+        ]
+      }
+    },
+    {
+      "id": "enpvovc434hkn0rn8293",
+      "description": "HTTPS from internet",
+      "direction": "INGRESS",
+      "ports": {
+        "from_port": "443",
+        "to_port": "443"
+      },
+      "protocol_name": "TCP",
+      "protocol_number": "6",
+      "cidr_blocks": {
+        "v4_cidr_blocks": [
+          "0.0.0.0/0"
+        ]
+      }
+    },
+    {
+      "id": "enpeppsbbcrh7c06ho5d",
+      "description": "ALB health checks from YC ranges",
+      "direction": "INGRESS",
+      "ports": {
+        "to_port": "65535"
+      },
+      "protocol_name": "TCP",
+      "protocol_number": "6",
+      "cidr_blocks": {
+        "v4_cidr_blocks": [
+          "198.18.232.0/22",
+          "198.18.240.0/22"
+        ]
+      }
+    },
+    {
+      "id": "enpi74mu70vccclisflj",
+      "description": "Grafana UI from internet",
+      "direction": "INGRESS",
+      "ports": {
+        "from_port": "3000",
+        "to_port": "3000"
+      },
+      "protocol_name": "TCP",
+      "protocol_number": "6",
+      "cidr_blocks": {
+        "v4_cidr_blocks": [
+          "0.0.0.0/0"
+        ]
+      }
+    },
+    {
+      "id": "enpdq0qoicl139rqaj8s",
+      "description": "Prometheus API",
+      "direction": "INGRESS",
+      "ports": {
+        "from_port": "9090",
+        "to_port": "9090"
+      },
+      "protocol_name": "TCP",
+      "protocol_number": "6",
+      "security_group_id": "enpnqhl945ohafhvg7jp"
+    },
+    {
+      "id": "enpa660kaou1d8b192vc",
+      "description": "Kibana UI from internet",
+      "direction": "INGRESS",
+      "ports": {
+        "from_port": "5601",
+        "to_port": "5601"
+      },
+      "protocol_name": "TCP",
+      "protocol_number": "6",
+      "cidr_blocks": {
+        "v4_cidr_blocks": [
+          "0.0.0.0/0"
+        ]
+      }
+    },
+    {
+      "id": "enp9jme4t6m46noi4klk",
+      "description": "HTTP from internet",
+      "direction": "INGRESS",
+      "ports": {
+        "from_port": "80",
+        "to_port": "80"
+      },
+      "protocol_name": "TCP",
+      "protocol_number": "6",
+      "cidr_blocks": {
+        "v4_cidr_blocks": [
+          "0.0.0.0/0"
+        ]
+      }
+    },
+    {
+      "id": "enp76ara0v31bk0la4l1",
+      "description": "SSH only from bastion",
+      "direction": "INGRESS",
+      "ports": {
+        "from_port": "22",
+        "to_port": "22"
+      },
+      "protocol_name": "TCP",
+      "protocol_number": "6",
+      "security_group_id": "enpnqhl945ohafhvg7jp"
+    },
+    {
+      "id": "enp8bq0ivms3lk9f83l4",
+      "description": "Elasticsearch API",
+      "direction": "INGRESS",
+      "ports": {
+        "from_port": "9200",
+        "to_port": "9200"
+      },
+      "protocol_name": "TCP",
+      "protocol_number": "6",
+      "cidr_blocks": {
+        "v4_cidr_blocks": [
+          "10.0.0.0/16"
+        ]
+      }
+    }
+  ]
+}
+

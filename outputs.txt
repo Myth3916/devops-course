@@ -1,0 +1,20 @@
+balancer_public_ip = "158.160.236.226"
+bastion_public_ip = "130.193.49.35"
+cloud_id = ""
+folder_id_out = "b1gu6pcctq3f129snd9r"
+security_group_ids = {
+  "bastion" = "enpnqhl945ohafhvg7jp"
+  "internal" = "enpupevqa0j3422itmm9"
+  "public" = "enpg3kiju9ikf3g8e4cr"
+}
+subnet_ids = {
+  "private_a" = "e9bbiqg3m0cv6pafcils"
+  "private_b" = "e2lmhul1rekss1spq1ph"
+  "public_a" = "e9bs5all32e94rpr4hoh"
+  "public_b" = "e2lu3o7ie99f43qd4koa"
+}
+vpc_id = "enp88n9vccperevqqqud"
+web_servers_private_ips = {
+  "web_a" = "10.0.2.7"
+  "web_b" = "10.0.4.31"
+}

@@ -1,0 +1,36 @@
+---
+- name: Copy Kibana deb package
+  copy:
+    src: "{{ playbook_dir }}/ansible/files/kibana-7.17.0-amd64.deb"
+    dest: /tmp/kibana-7.17.0-amd64.deb
+    mode: '0644'
+
+- name: Install Kibana
+  apt:
+    deb: /tmp/kibana-7.17.0-amd64.deb
+    state: present
+
+- name: Configure Kibana
+  lineinfile:
+    path: /etc/kibana/kibana.yml
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    create: yes
+  loop:
+    - { regexp: '^#?server.port:', line: 'server.port: 5601' }
+    - { regexp: '^#?server.host:', line: 'server.host: "0.0.0.0"' }
+    - { regexp: '^#?elasticsearch.hosts:', line: 'elasticsearch.hosts: ["http://localhost:9200"]' }
+
+- name: Enable and start Kibana
+  systemd:
+    name: kibana
+    enabled: yes
+    state: started
+    daemon_reload: yes
+
+- name: Wait for Kibana to be ready
+  wait_for:
+    port: 5601
+    delay: 10
+    timeout: 60

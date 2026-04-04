@@ -1,0 +1,37 @@
+---
+- name: Copy Elasticsearch deb package
+  copy:
+    src: "{{ playbook_dir }}/ansible/files/elasticsearch-7.17.0-amd64.deb"
+    dest: /tmp/elasticsearch-7.17.0-amd64.deb
+    mode: '0644'
+
+- name: Install Elasticsearch
+  apt:
+    deb: /tmp/elasticsearch-7.17.0-amd64.deb
+    state: present
+
+- name: Configure Elasticsearch
+  lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    create: yes
+  loop:
+    - { regexp: '^#?network.host:', line: 'network.host: 0.0.0.0' }
+    - { regexp: '^#?http.port:', line: 'http.port: 9200' }
+    - { regexp: '^#?xpack.security.enabled:', line: 'xpack.security.enabled: false' }
+    - { regexp: '^#?discovery.type:', line: 'discovery.type: single-node' }
+
+- name: Enable and start Elasticsearch
+  systemd:
+    name: elasticsearch
+    enabled: yes
+    state: started
+    daemon_reload: yes
+
+- name: Wait for Elasticsearch to be ready
+  wait_for:
+    port: 9200
+    delay: 10
+    timeout: 60

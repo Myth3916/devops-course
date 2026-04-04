@@ -1,0 +1,37 @@
+---
+# Глобальные переменные
+deb_packages_dir: "{{ playbook_dir }}/../files"
+
+# Версии
+elasticsearch_version: "7.17.0"
+kibana_version: "7.17.0"
+filebeat_version: "8.14.0"  # ✅ Совместим с Ubuntu 22.04!
+prometheus_version: "2.45.0"
+node_exporter_version: "1.6.1"
+
+# Elasticsearch
+elasticsearch_host: "10.0.1.15"
+elasticsearch_port: 9200
+
+# Kibana
+kibana_host: "0.0.0.0"
+kibana_port: 5601
+
+# Prometheus
+prometheus_host: "0.0.0.0"
+prometheus_port: 9090
+
+# Grafana
+grafana_host: "0.0.0.0"
+grafana_port: 3000
+
+# Node Exporter
+node_exporter_port: 9100
+
+# Filebeat
+filebeat_output_hosts:
+  - "{{ elasticsearch_host }}:{{ elasticsearch_port }}"
+  
+filebeat_inputs_type: "filestream"  # ✅ Для v8.x
+nginx_access_log: "/var/log/nginx/access.log"
+nginx_error_log: "/var/log/nginx/error.log"
