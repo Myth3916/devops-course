@@ -26,7 +26,7 @@ resource "yandex_compute_instance" "web_a" {
   # ЕДИНСТВЕННЫЙ сетевой интерфейс для web_a
   network_interface {
     subnet_id          = yandex_vpc_subnet.private_a.id
-    nat                = true # false # Временно включаем для установки пакетов
+    nat                = false # true  Временно включаем для установки пакетов
     security_group_ids = [yandex_vpc_security_group.sg_internal.id]
   }
 
@@ -63,7 +63,7 @@ resource "yandex_compute_instance" "web_b" {
   # ЕДИНСТВЕННЫЙ сетевой интерфейс для web_b
   network_interface {
     subnet_id          = yandex_vpc_subnet.private_b.id
-    nat                = true # false # Временно включаем для установки пакетов
+    nat                = false # true  Временно включаем для установки пакетов
     security_group_ids = [yandex_vpc_security_group.sg_internal.id]
   }
 
