@@ -368,3 +368,24 @@ ssh monitoring
 **Источник:** Prometheus + Node Exporter  
 **Дашборд:** [Node Exporter Full #1860](https://grafana.com/grafana/dashboards/1860)
 
+### 🔷 Балансировщик нагрузки
+
+![Load Balancer Test](screenshots/06-load-balancer-curl.png)
+
+**Результат:** Запросы чередуются между веб-серверами:
+- `web-server-a` (10.0.2.13)
+- `web-server-b` (10.0.4.15)
+
+**ALB:** `158.160.184.65:80`  
+**Health Check:** HTTP GET `/` → 200 OK  
+**Алгоритм:** Round Robin
+
+### 🔷 Elasticsearch — проверка работы
+
+![Elasticsearch Version](screenshots/08-elasticsearch-version.png)
+
+**Команда:** `curl -s http://localhost:9200 | jq .version`  
+**Результат:** Elasticsearch 7.17.0 работает и отвечает на запросы  
+**Хост:** `logging-server` (10.0.1.15:9200)
+
+
