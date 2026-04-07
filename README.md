@@ -350,4 +350,10 @@ ssh monitoring
 | **Ubuntu 22.04 LTS** | CentOS 7/8 / Debian 11 / Alpine | ✅ Долгосрочная поддержка (до 2027), актуальные пакеты, хорошая совместимость с инструментами мониторинга и логирования. |
 | **Security Groups вместо iptables** | Только iptables / UFW / Firewalld | ✅ Централизованное управление правилами в Yandex Cloud, визуализация, интеграция с VPC. |
 
+### 📊 Kibana — логи от веб-серверов
+
+![Kibana Discover](screenshots/kibana-discover-logs.png)
+
+**Результат:** 472,517 событий от nginx (web-server-a и web-server-b)
+
 
