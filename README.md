@@ -238,7 +238,7 @@ $ curl -s 'http://10.0.1.15:9200/filebeat-*/_search?size=1&pretty' -H 'Content-T
 ```bash
 $ yc compute snapshot list --folder-id b1gu6pcctq3f129snd9r
 ```
-![Snapshot](screenshots/06-load-balancer-curl.png)
+![Snapshot](screenshots/07-snapshots-list.png)
 
 ## 🚀 Развёртывание
 Предварительные требования
