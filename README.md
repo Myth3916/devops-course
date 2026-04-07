@@ -356,4 +356,14 @@ ssh monitoring
 
 **Результат:** 472,517 событий от nginx (web-server-a и web-server-b)
 
+### 📊 Grafana — дашборд метрик
+
+![Grafana Dashboard](screenshots/grafana-dashboard.png)
+
+**Дашборд:** [Node Exporter Full #1860](https://grafana.com/grafana/dashboards/1860)  
+**Источник данных:** Prometheus (http://10.0.1.38:9090)  
+**Метрики:** CPU (0.4%), RAM (34.1%), Disk (29.8%), Network Traffic  
+**Хост:** web-server-b (10.0.4.15:9100)  
+**Время обновления:** Last 15 minutes
+
 
