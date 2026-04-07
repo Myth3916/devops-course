@@ -65,6 +65,7 @@
 → web-server-a ИЛИ web-server-b (nginx:80)
 → Filebeat → Elasticsearch → Kibana
 
+```markdown
 Пользователь
     ↓
     → ALB (158.160.184.65:80)
@@ -80,7 +81,7 @@
                                        ↓
                                        → Kibana
 
-
+```
 
 ---
 
