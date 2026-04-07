@@ -237,14 +237,8 @@ $ curl -s 'http://10.0.1.15:9200/filebeat-*/_search?size=1&pretty' -H 'Content-T
 
 ```bash
 $ yc compute snapshot list --folder-id b1gu6pcctq3f129snd9r
-+----------------------+----------------------------+----------------------+----------+
-|          ID          |            NAME            |     PRODUCT IDS      |  STATUS  |
-+----------------------+----------------------------+----------------------+----------+
-| fd89oehe1jo3b0db64pk | snapshot-epdv4m76-20260404 | f2enc5rilhjbemil8529 | READY    |
-| fd8cmkgjskj8n269be3k | snapshot-fhmg5eac-20260404 | f2enc5rilhjbemil8529 | READY    |
-| ...                  | ...                        | ...                  | ...      |
-+----------------------+----------------------------+----------------------+----------+
 ```
+![Snapshot](screenshots/06-load-balancer-curl.png)
 
 ## 🚀 Развёртывание
 Предварительные требования
